@@ -36,6 +36,9 @@ declare module '@mui/material/styles' {
       main?: string
     }
   }
+  interface TypeBackground {
+    dark?: string
+  }
 }
 
 declare module '@mui/material/styles' {
