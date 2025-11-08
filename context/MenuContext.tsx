@@ -37,6 +37,7 @@ interface MenuContextType {
   products: Product[]
   getProductsByCategory: (categoryId: string) => Product[]
   getCategoryById: (categoryId: string) => Category | undefined
+  getProductById: (productId: string) => Product | undefined
   loading: boolean
   error: string | null
 }
@@ -103,11 +104,20 @@ export const MenuProvider = ({ children }: MenuProviderProps) => {
     [categories]
   )
 
+  // Función para obtener producto por ID
+  const getProductById = useMemo(
+    () => (productId: string) => {
+      return products.find((product) => product.id === productId)
+    },
+    [products]
+  )
+
   const value: MenuContextType = {
     categories,
     products,
     getProductsByCategory,
     getCategoryById,
+    getProductById,
     loading,
     error,
   }

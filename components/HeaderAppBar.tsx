@@ -27,6 +27,13 @@ const HeaderAppBar = memo(({ setOpen, onBack }: HeaderAppBarProps) => {
  */
   // Función para retroceder - memoizada para evitar recreaciones
   const handleBack = useCallback(() => {
+        // Para cualquier otra ruta, intentar usar router.back()
+    // Si no hay historial, ir a la página de bienvenida como fallback
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back()
+      return
+    }
+
     if (onBack) {
       // Si hay un callback personalizado, usarlo
       onBack()
@@ -43,25 +50,13 @@ const HeaderAppBar = memo(({ setOpen, onBack }: HeaderAppBarProps) => {
     // Si estamos en una subpágina del menú (ej: /menu/categoryId), volver al menú principal
     if (pathname.startsWith('/menu/') && pathname !== '/menu') {
       router.push('/menu')
-      return
-    }
-
-    // Si estamos en /menu, ir a la página de bienvenida
-    if (pathname === '/menu') {
-      router.push('/')
-      return
-    }
-
-    // Para cualquier otra ruta, intentar usar router.back()
-    // Si no hay historial, ir a la página de bienvenida como fallback
-    if (typeof window !== 'undefined' && window.history.length > 1) {
-      router.back()
+    
     } else {
       router.push('/')
     }
   }, [onBack, router, pathname])
 
-  const logoHeader = theme.extras?.logoHeader || '/logo.png'
+  const logoHeader = theme.extras?.logoHeader
 
   return (
     <Box sx={{ flexGrow: 1 }}>

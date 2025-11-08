@@ -11,11 +11,8 @@ import {
   useTheme,
 } from "@mui/material";
 import Link from "next/link";
-/* import SizeOptions from "./SizeOptions";
-import SizeOptionsBadge from "./SizeOptionsBadge"; */
 import ImageModal from "@/components/ImageModal";
-/* import AddToCartComponent from "./AddToCartComponent";
- */
+
 import { formatPrice } from "../utils/formatters";
 
 // Estilos centralizados
@@ -154,7 +151,7 @@ const ProductComponent = ({ product }) => {
                   alignItems: "flex-start",
                   width: "100%",
                 }}
-                href={`/products/${product.id}`}
+                href={`/menu/${product.productCategoryId}/${product.id}`}
               >
                 <Box
                   sx={{

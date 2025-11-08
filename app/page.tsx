@@ -22,7 +22,7 @@ const WelcomeScreen = () => {
     router.push('/menu')
   }
 
-  const logoPath = theme.extras?.logo || '/logo.png'
+  const logoPath = theme.extras?.logo 
 
   return (
     <Box

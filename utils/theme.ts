@@ -104,9 +104,9 @@ export const createAppTheme = (themeConfig?: ThemeConfig) => {
         },
       },
       extras: {
-        logo: '/images/MaMaLogosf.png',
-        logoHeader: '/images/MaMaLogosf.png',
-        defaultImage: '/images/MaMaLogo.jpg',
+        logo: '/logo.png',
+        logoHeader: '/logo.png',
+        defaultImage: '/logo-rojo.webp',
       },
     })
   }
@@ -147,9 +147,9 @@ export const createAppTheme = (themeConfig?: ThemeConfig) => {
       fontFamily: themeConfig.typography?.fontFamily || 'Roboto, Arial, sans-serif',
     },
     extras: {
-      logo: themeConfig.logo || '/images/MaMaLogosf.png',
-      logoHeader: themeConfig.logoHeader || '/images/MaMaLogosf.png',
-      defaultImage: themeConfig.defaultImage || '/images/MaMaLogo.jpg',
+      logo: themeConfig.logo || '/logo.png',
+      logoHeader: themeConfig.logoHeader || '/logo.png',
+      defaultImage: themeConfig.defaultImage || '/RojoLlogo-fondoogo.webp',
     },
   })
 }

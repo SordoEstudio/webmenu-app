@@ -136,5 +136,5 @@ const defaultThemeConfig = {
   },
   logo: "/logo.png",
   logoHeader: "/logo.png",
-  defaultImage: "/logo.jpg"
+  defaultImage: "/logo-rojo.webp"
 };
