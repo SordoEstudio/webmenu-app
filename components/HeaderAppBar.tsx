@@ -1,8 +1,8 @@
 'use client'
 
-import React from 'react'
+import React, { memo, useCallback } from 'react'
 import { Box, Toolbar, IconButton, AppBar, useTheme } from '@mui/material'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname, useParams } from 'next/navigation'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import MenuIcon from '@mui/icons-material/Menu'
 import Image from 'next/image'
@@ -13,23 +13,53 @@ interface HeaderAppBarProps {
   onBack?: () => void
 }
 
-const HeaderAppBar = ({ setOpen, onBack }: HeaderAppBarProps) => {
+const HeaderAppBar = memo(({ setOpen, onBack }: HeaderAppBarProps) => {
   const theme = useTheme()
   const router = useRouter()
   const pathname = usePathname()
+  const params = useParams()
 
-  // Condición para ocultar el botón
-  const isHome = pathname === '/menu' || pathname === '/'
+  // Determinar si estamos en la página principal del menú
+  // Rutas principales: /, /menu
+  const isHome = pathname === '/' || pathname === '/menu'
+
 /*   const { carrito } = usePlan()
  */
-  // Función para retroceder
-  const handleBack = () => {
+  // Función para retroceder - memoizada para evitar recreaciones
+  const handleBack = useCallback(() => {
     if (onBack) {
+      // Si hay un callback personalizado, usarlo
       onBack()
-    } else {
-      router.back()
+      return
     }
-  }
+
+    // Lógica de navegación basada en la ruta actual
+    if (!pathname) {
+      // Si no hay pathname, ir a la página de bienvenida
+      router.push('/')
+      return
+    }
+
+    // Si estamos en una subpágina del menú (ej: /menu/categoryId), volver al menú principal
+    if (pathname.startsWith('/menu/') && pathname !== '/menu') {
+      router.push('/menu')
+      return
+    }
+
+    // Si estamos en /menu, ir a la página de bienvenida
+    if (pathname === '/menu') {
+      router.push('/')
+      return
+    }
+
+    // Para cualquier otra ruta, intentar usar router.back()
+    // Si no hay historial, ir a la página de bienvenida como fallback
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back()
+    } else {
+      router.push('/')
+    }
+  }, [onBack, router, pathname])
 
   const logoHeader = theme.extras?.logoHeader || '/logo.png'
 
@@ -50,6 +80,7 @@ const HeaderAppBar = ({ setOpen, onBack }: HeaderAppBarProps) => {
       >
         <Toolbar
           sx={{
+            position: 'relative',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -70,6 +101,7 @@ const HeaderAppBar = ({ setOpen, onBack }: HeaderAppBarProps) => {
                 '@media (max-width: 600px)': {
                   fontSize: '2rem',
                 },
+                zIndex: 1,
               }}
             >
               <ArrowBackIcon />
@@ -78,31 +110,40 @@ const HeaderAppBar = ({ setOpen, onBack }: HeaderAppBarProps) => {
             <Box sx={{ width: '24px', mx: '12px', p: '12px' }} />
           )}
 
-          {/* Logo de la empresa */}
+          {/* Logo de la empresa - Centrado de forma absoluta */}
           <Box
             sx={{
-              position: 'relative',
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
               height: '40px',
               width: '150px',
               maxWidth: '150px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               '@media (max-width: 600px)': {
                 height: '50px',
               },
               '@media (min-width: 960px)': {
                 height: '48px',
               },
+              zIndex: 0,
             }}
           >
             <Image
               src={logoHeader}
               alt="Logo de la empresa"
               fill
+              sizes="150px"
               style={{ objectFit: 'contain' }}
               priority
             />
           </Box>
 
-          {/* Botón de menú */}
+          {/* Botón de menú - Espaciador para mantener el balance */}
+          <Box sx={{ width: '24px', mx: '12px', p: '12px' }} />
 {/*           {carrito ? (
             <IconButton
               size="large"
@@ -115,6 +156,7 @@ const HeaderAppBar = ({ setOpen, onBack }: HeaderAppBarProps) => {
                 '@media (max-width: 600px)': {
                   fontSize: '2rem',
                 },
+                zIndex: 1,
               }}
             >
               <MenuIcon />
@@ -126,7 +168,9 @@ const HeaderAppBar = ({ setOpen, onBack }: HeaderAppBarProps) => {
       </AppBar>
     </Box>
   )
-}
+})
+
+HeaderAppBar.displayName = 'HeaderAppBar'
 
 export default HeaderAppBar
 

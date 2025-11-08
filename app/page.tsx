@@ -19,12 +19,7 @@ const WelcomeScreen = () => {
   const darkColor = darken(baseColor, 0.2)
 
   const handleEnter = () => {
-    if (cliente) {
-      router.push(`/${cliente}/menu`)
-    } else {
-      // Si no hay cliente en la URL, redirigir a una ruta por defecto
-      router.push('/menu')
-    }
+    router.push('/menu')
   }
 
   const logoPath = theme.extras?.logo || '/logo.png'
@@ -37,8 +32,8 @@ const WelcomeScreen = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        background: `linear-gradient(to bottom, ${darkColor}, ${lightColor})`,
         textAlign: 'center',
+        background: `linear-gradient(to bottom, ${darkColor}, ${lightColor})`,
       }}
     >
       {/* Logo */}
@@ -56,6 +51,7 @@ const WelcomeScreen = () => {
           src={logoPath}
           alt="Logo del restaurante"
           fill
+          sizes="(max-width: 600px) 300px, 400px"
           style={{ objectFit: 'contain' }}
           priority
         />

@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import LayoutWrapper from '@/components/LayoutWrapper'
-
+import { MenuProvider } from '@/context/MenuContext'
+import { ClientProvider } from '@/context/ClientContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -20,9 +21,13 @@ export default function RootLayout({
     <html lang="es">
       <body className={inter.className}>
         <ThemeProvider>
-          <LayoutWrapper>
-            {children}
-          </LayoutWrapper>
+          <MenuProvider>
+            <ClientProvider>
+              <LayoutWrapper>
+                {children}
+              </LayoutWrapper>
+            </ClientProvider>
+          </MenuProvider>
         </ThemeProvider>
       </body>
     </html>

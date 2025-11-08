@@ -27,7 +27,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "types/**/*.ts"
+    "types/**/*.ts",
+    "app/[category]/page.tsx",
+    "components/ViewToggleFab.jsx"
   ],
   "exclude": ["node_modules"]
 }

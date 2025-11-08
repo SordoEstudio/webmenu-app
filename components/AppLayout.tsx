@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Box } from '@mui/material'
 import HeaderAppBar from './HeaderAppBar'
 import Footer from './Footer'
+
 /* import CartFab from './CartFab'
  */
 interface AppLayoutProps {
@@ -12,6 +13,8 @@ interface AppLayoutProps {
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   const [open, setOpen] = useState(false)
+  
+  // setOpen de useState es estable y no cambia, no necesita memoización
 
   return (
     <Box>
