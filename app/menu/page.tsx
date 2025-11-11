@@ -5,12 +5,16 @@ import { Box, List } from '@mui/material'
 import CategoryComponent from '@/components/CategoryComponent'
 import CategoriesGrid from '@/components/CategoriesGrid'
 import ViewToggleFab from '@/components/ViewToggleFab'
+import SearchFab from '@/components/SearchFab'
+import SearchResults from '@/components/SearchResults'
 import { useMenu } from '@/context/MenuContext'
-
+import { useSearch } from '@/context/SearchContext'
+import AboutFab from '@/components/AboutFab'
 export default function MenuPage() {
   const [cardView, setCardView] = useState(true)
   const avatarView = false
   const { categories, loading } = useMenu()
+  const { isSearchActive } = useSearch()
 
   const handleView = () => {
     setCardView(!cardView)
@@ -42,29 +46,37 @@ export default function MenuPage() {
   return (
     <Box sx={{ px: { xs: 2, sm: 3, md: 4 }, py: 2 }}>
       {/* FAB para cambiar vista */}
-      <ViewToggleFab isGridView={cardView} onToggle={handleView} />
-
-      {/* Contenido: Lista o Grid */}
-      {!cardView ? (
-        <List
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            margin: 0,
-            marginBottom: 3,
-          }}
-        >
-          {visibleCategories.map((category) => (
-            <CategoryComponent
-              key={category.id}
-              category={category}
-              avatarView={avatarView}
-            />
-          ))}
-        </List>
+{/*       {!isSearchActive && (
+        <ViewToggleFab isGridView={cardView} onToggle={handleView} />
+      )} */}
+      <SearchFab />
+      <AboutFab />
+      {/* Mostrar resultados de búsqueda si hay búsqueda activa */}
+      {isSearchActive ? (
+        <SearchResults />
       ) : (
-        <CategoriesGrid categories={visibleCategories} avatarView={avatarView} />
+        /* Contenido normal: Lista o Grid de categorías */
+        !cardView ? (
+          <List
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2,
+              margin: 0,
+              marginBottom: 3,
+            }}
+          >
+            {visibleCategories.map((category) => (
+              <CategoryComponent
+                key={category.id}
+                category={category}
+                avatarView={avatarView}
+              />
+            ))}
+          </List>
+        ) : (
+          <CategoriesGrid categories={visibleCategories} avatarView={avatarView} />
+        )
       )}
     </Box>
   )

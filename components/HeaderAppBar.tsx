@@ -4,7 +4,6 @@ import React, { memo, useCallback } from 'react'
 import { Box, Toolbar, IconButton, AppBar, useTheme } from '@mui/material'
 import { useRouter, usePathname, useParams } from 'next/navigation'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import MenuIcon from '@mui/icons-material/Menu'
 import Image from 'next/image'
 /* import { usePlan } from '@/context/ConfigContext'
  */

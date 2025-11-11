@@ -31,126 +31,53 @@ interface ThemeConfig {
 }
 
 export const createAppTheme = (themeConfig?: ThemeConfig) => {
-  // Si no hay themeConfig, usar valores por defecto
+  // Si no hay themeConfig, NO usar valores por defecto hardcodeados
   if (!themeConfig) {
-    return createTheme({
-      palette: {
-        primary: {
-          main: '#f5bb06', // Amarillo
-          light: lighten('#f5bb06', 0.2),
-          dark: darken('#f5bb06', 0.2),
-          contrastText: '#ffffff',
-        },
-        secondary: {
-          main: '#350156', // Lila
-          light: lighten('#350156', 0.2),
-          dark: darken('#350156', 0.2),
-          contrastText: '#ffffff',
-        },
-        success: {
-          main: '#27AE60', // Verde lima para confirmaciones
-          light: lighten('#27AE60', 0.2),
-          dark: darken('#27AE60', 0.2),
-        },
-        background: {
-          default: '#F8F8F8', // Blanco hueso
-          paper: '#ffffff',
-          dark: '#333333', // Negro suave
-        },
-        text: {
-          primary: '#333333', // Negro suave para texto principal
-          secondary: '#666666', // Versión más clara para texto secundario
-        },
-        socialMedia: {
-          main: '#004B5A', // Usando el color primario para consistencia
-        },
-        typographyColor: {
-          white: '#F8F8F8',
-          black: '#333333',
-        },
-      },
-      typography: {
-        fontFamily: 'Roboto, Arial, sans-serif',
-        h1: {
-          color: '#004B5A',
-        },
-        h2: {
-          color: '#004B5A',
-        },
-        h3: {
-          color: '#004B5A',
-        },
-      },
-      components: {
-        MuiCssBaseline: {
-          styleOverrides: {
-            body: {
-              scrollBehavior: 'smooth',
-            },
-          },
-        },
-        MuiButton: {
-          styleOverrides: {
-            containedPrimary: {
-              backgroundColor: '#f5bb06',
-            },
-            containedSecondary: {
-              backgroundColor: '#350156',
-              '&:hover': {
-                transform: 'scale(1.05)',
-              },
-            },
-          },
-        },
-      },
-      extras: {
-        logo: '/logo.png',
-        logoHeader: '/logo.png',
-        defaultImage: '/logo-rojo.webp',
-      },
-    })
+    return createTheme({})
   }
 
-  const baseColor = themeConfig.baseColor || '#f5bb06'
+  const baseColor = themeConfig.baseColor
 
   return createTheme({
     palette: {
       primary: {
-        contrastText: themeConfig.primary?.contrastText || '#ffffff',
+        contrastText: themeConfig.primary?.contrastText,
         main: baseColor,
-        light: lighten(
-          baseColor,
-          themeConfig.primary?.light || 0.2
-        ),
-        ultraLight: lighten(
-          baseColor,
-          themeConfig.primary?.ultraLight || 0.3
-        ),
-        dark: darken(baseColor, themeConfig.primary?.dark || 0.2),
+        light:
+          baseColor && themeConfig.primary?.light != null
+            ? lighten(baseColor, themeConfig.primary.light)
+            : undefined,
+        ultraLight:
+          baseColor && themeConfig.primary?.ultraLight != null
+            ? lighten(baseColor, themeConfig.primary.ultraLight)
+            : undefined,
+        dark:
+          baseColor && themeConfig.primary?.dark != null
+            ? darken(baseColor, themeConfig.primary.dark)
+            : undefined,
       },
       secondary: {
-        main: themeConfig.secondary?.main || '#350156',
+        main: themeConfig.secondary?.main,
       },
       background: {
-        default: themeConfig.background?.default || '#F8F8F8',
-        dark: themeConfig.background?.dark || '#333333',
+        default: themeConfig.background?.default,
+        dark: themeConfig.background?.dark,
       },
       socialMedia: {
-        main: themeConfig.socialMedia?.main || '#004B5A',
+        main: themeConfig.socialMedia?.main,
       },
       typographyColor: {
-        white: themeConfig.typographyColor?.white || '#F8F8F8',
-        black: themeConfig.typographyColor?.black || '#333333',
+        white: themeConfig.typographyColor?.white,
+        black: themeConfig.typographyColor?.black,
       },
     },
     typography: {
-      fontFamily: themeConfig.typography?.fontFamily || 'Roboto, Arial, sans-serif',
+      fontFamily: themeConfig.typography?.fontFamily,
     },
     extras: {
-      logo: themeConfig.logo || '/logo.png',
-      logoHeader: themeConfig.logoHeader || '/logo.png',
-      defaultImage: themeConfig.defaultImage || '/RojoLlogo-fondoogo.webp',
+      logo: themeConfig.logo,
+      logoHeader: themeConfig.logoHeader,
+      defaultImage: themeConfig.defaultImage,
     },
   })
 }
-

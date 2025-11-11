@@ -1,7 +1,7 @@
 'use client'
 
 import { useParams } from 'next/navigation'
-import { Box, List, Typography } from '@mui/material'
+import { Badge, Box, Chip, List, Typography } from '@mui/material'
 import ProductComponent from '@/components/ProductComponent'
 import { useMenu } from '@/context/MenuContext'
 import { useTheme } from '@mui/material/styles'
@@ -72,8 +72,11 @@ export default function CategoryProductsPage() {
           textAlign: 'center',
         }}
       >
+
+     
         <Typography variant="h5" gutterBottom>
           {category.name}
+   
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
           Esta sección estará disponible muy pronto!
@@ -102,21 +105,22 @@ export default function CategoryProductsPage() {
   }
 
   return (
-    <Box sx={{ px: { xs: 2, sm: 3, md: 4 }, py: 2 }}>
-      <Typography variant="h4" gutterBottom sx={{ mb: 3 }}>
-        {category.name}
-      </Typography>
-      {category.subtitle && (
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
-          {category.subtitle}
-        </Typography>
-      )}
+    <>
+      <Box sx={{ position:"sticky", top:75, zIndex:1000 ,backgroundColor:theme.palette.background.default,boxShadow: '0 0 8px rgba(0, 0, 0, 0.1)', width:'100%'}}>
+<Typography variant="h6" gutterBottom sx={{color:'grey.500',textAlign:'center'}}>
+  {category.name} 
+</Typography>
+      </Box>
+    <Box sx={{ px: { xs: 2, sm: 3, md: 4 }, py: 0, textAlign: 'center' }}>
+
       <List sx={{ mt: 2, mb: 6 }}>
         {products.map((product) => (
           <ProductComponent key={product.id} product={product} />
         ))}
       </List>
     </Box>
+    </>
+
   )
 }
 

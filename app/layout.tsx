@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import LayoutWrapper from '@/components/LayoutWrapper'
 import { MenuProvider } from '@/context/MenuContext'
 import { ClientProvider } from '@/context/ClientContext'
+import { SearchProvider } from '@/context/SearchContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -21,13 +22,15 @@ export default function RootLayout({
     <html lang="es">
       <body className={inter.className}>
         <ThemeProvider>
-          <MenuProvider>
-            <ClientProvider>
-              <LayoutWrapper>
-                {children}
-              </LayoutWrapper>
-            </ClientProvider>
-          </MenuProvider>
+          <SearchProvider>
+            <MenuProvider>
+              <ClientProvider>
+                <LayoutWrapper>
+                  {children}
+                </LayoutWrapper>
+              </ClientProvider>
+            </MenuProvider>
+          </SearchProvider>
         </ThemeProvider>
       </body>
     </html>

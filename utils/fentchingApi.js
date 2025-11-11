@@ -81,7 +81,7 @@ export const fetchPlanConfig = async () => {
   }
 }; */
 
-export const fetchThemeConfig = async () => {
+/* export const fetchThemeConfig = async () => {
   try {
     const response = await fetch("http://localhost:3001/BrandConfig");
     if (!response.ok) {
@@ -107,34 +107,6 @@ export const fetchSocialLinks = async () => {
     console.error("Error al obtener los enlaces de redes sociales:", error);
     throw error;
   }
-};
+}; */
 // Configuración por defecto como fallback
-const defaultThemeConfig = {
-  baseColor: "#e00c0b",
-  primary: {
-    contrastText: "#ffffff",
-    light: 0.2,
-    ultraLight: 0.75,
-    dark: 0.2
-  },
-  secondary: {
-    main: "#4CAF50"
-  },
-  background: {
-    default: "#f5f5f5",
-    dark: "#121212"
-  },
-  socialMedia: {
-    main: "#ffffff"
-  },
-  typographyColor: {
-    white: "#fafafa",
-    black: "#1a1a1a"
-  },
-  typography: {
-    fontFamily: "Roboto, Arial, sans-serif"
-  },
-  logo: "/logo.png",
-  logoHeader: "/logo.png",
-  defaultImage: "/logo-rojo.webp"
-};
+
