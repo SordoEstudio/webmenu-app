@@ -27,11 +27,11 @@ interface AboutData {
     alt: string
     principal?: boolean
   }>
-  contact?: {
-    phone?: string
-    email?: string
-    whatsapp?: string
-  }
+  contact?: Array<{
+    icon: string
+    link: string
+    label: string
+  }>
   location?: {
     address?: string
     city?: string
@@ -66,7 +66,7 @@ const AboutComponent = ({ data }: AboutComponentProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Validar URL de imagen
-  const isValidImageUrl = (url: string) => {
+  const isValidImageUrl = (url: string | undefined) => {
     return url && (url.startsWith('http') || url.startsWith('/'))
   }
 
@@ -76,7 +76,7 @@ const AboutComponent = ({ data }: AboutComponentProps) => {
       ? data.images.map((img) => img.image).filter(Boolean)
       : []
 
-  const currentImage = images[currentImageIndex] || theme.extras?.defaultImage
+  const currentImage: string = images[currentImageIndex] || theme.extras?.defaultImage || '/logo.png'
 
   const handleNextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length)
