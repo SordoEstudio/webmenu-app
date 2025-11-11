@@ -55,7 +55,7 @@ const HeaderAppBar = memo(({ setOpen, onBack }: HeaderAppBarProps) => {
     }
   }, [onBack, router, pathname])
 
-  const logoHeader = theme.extras?.logoHeader
+  const logoHeader: string = theme.extras?.logoHeader || '/logo.png'
 
   return (
     <Box sx={{ flexGrow: 1 }}>

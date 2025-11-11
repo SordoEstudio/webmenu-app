@@ -36,28 +36,28 @@ export const createAppTheme = (themeConfig?: ThemeConfig) => {
     return createTheme({})
   }
 
-  const baseColor = themeConfig.baseColor
+  const baseColor = themeConfig.baseColor || '#f5bb06'
 
   return createTheme({
     palette: {
       primary: {
-        contrastText: themeConfig.primary?.contrastText,
+        contrastText: themeConfig.primary?.contrastText || '#ffffff',
         main: baseColor,
         light:
           baseColor && themeConfig.primary?.light != null
             ? lighten(baseColor, themeConfig.primary.light)
-            : undefined,
+            : lighten(baseColor, 0.2),
         ultraLight:
           baseColor && themeConfig.primary?.ultraLight != null
             ? lighten(baseColor, themeConfig.primary.ultraLight)
-            : undefined,
+            : lighten(baseColor, 0.3),
         dark:
           baseColor && themeConfig.primary?.dark != null
             ? darken(baseColor, themeConfig.primary.dark)
-            : undefined,
+            : darken(baseColor, 0.2),
       },
       secondary: {
-        main: themeConfig.secondary?.main,
+        main: themeConfig.secondary?.main || '#350156',
       },
       background: {
         default: themeConfig.background?.default,
