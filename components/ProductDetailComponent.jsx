@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Box, Typography, useTheme, Avatar } from "@mui/material";
 import { formatPrice } from "../utils/formatters";
 import ImageModal from "@/components/ImageModal";
-import productData from "@/data/productData.json";
 const ProductDetailComponent = ({ product }) => {
 
  /*    product =product?product:productData; */
