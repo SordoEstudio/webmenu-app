@@ -91,13 +91,7 @@ export default function CategoryProductsPage() {
               maxHeight: '40%',
             }}
           >
-            <Image
-              src={theme.extras.logo}
-              alt="Logo"
-              fill
-              sizes="(max-width: 600px) 200px, 200px"
-              style={{ objectFit: 'contain' }}
-            />
+
           </Box>
         )}
       </Box>

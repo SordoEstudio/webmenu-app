@@ -2,22 +2,26 @@
 
 import React from 'react'
 import { Box, IconButton } from '@mui/material'
-import IconRenderer from '@/components/IconRender'
+import IconRender from '@/components/IconRender'
 
-interface SocialLink {
+interface Contact {
   name: string
-  url: string
-  icon: string
-  title?: string
+  link: string
+  label: string
+  social?: boolean
+  media?: boolean
 }
 
 interface SocialProps {
-  socialLinks: SocialLink[]
+  contact: Contact[]
   sx?: object
 }
 
-const Social = ({ socialLinks, sx }: SocialProps) => {
-  if (!socialLinks || socialLinks.length === 0) {
+const Social = ({ contact, sx }: SocialProps) => {
+  // Filtrar contactos que tengan social: true o media: true (para compatibilidad)
+  const socialContacts = contact?.filter((item) => item.social === true ) || []
+
+  if (!socialContacts || socialContacts.length === 0) {
     return null
   }
 
@@ -33,17 +37,17 @@ const Social = ({ socialLinks, sx }: SocialProps) => {
         ...sx,
       }}
     >
-      {socialLinks.map((link, i) => (
+      {socialContacts.map((item, i) => (
         <IconButton
-          key={`${link.name}-${i}`}
+          key={`${item.name}-${i}`}
           component="a"
-          href={link.url}
+          href={item.link}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={link.name}
+          aria-label={item.label || item.name}
           sx={{ color: 'socialMedia.main' }}
         >
-          <IconRenderer icon={link.icon} />
+          <IconRender icon={item.name} />
         </IconButton>
       ))}
     </Box>

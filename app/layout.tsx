@@ -3,35 +3,47 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import LayoutWrapper from '@/components/LayoutWrapper'
+import { TenantProvider } from '@/context/TenantContext'
 import { MenuProvider } from '@/context/MenuContext'
-import { ClientProvider } from '@/context/ClientContext'
 import { SearchProvider } from '@/context/SearchContext'
+import { getTenantId, loadTenantConfig } from '@/utils/tenant'
+
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'WebMenu App',
-  description: 'Aplicación web con Next.js, Material-UI y Tailwind CSS',
+// Cargar metadata del tenant en el servidor
+export async function generateMetadata(): Promise<Metadata> {
+  const tenantId = getTenantId()
+  const config = await loadTenantConfig(tenantId)
+  
+  return {
+    title: config.metadata.title,
+    description: config.metadata.description,
+  }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  // Cargar configuración del tenant en el servidor para el lang
+  const tenantId = getTenantId()
+  const config = await loadTenantConfig(tenantId)
+
   return (
-    <html lang="es">
+    <html lang={config.metadata.language}>
       <body className={inter.className}>
-        <ThemeProvider>
-          <SearchProvider>
-            <MenuProvider>
-              <ClientProvider>
+        <TenantProvider>
+          <ThemeProvider>
+            <SearchProvider>
+              <MenuProvider>
                 <LayoutWrapper>
                   {children}
                 </LayoutWrapper>
-              </ClientProvider>
-            </MenuProvider>
-          </SearchProvider>
-        </ThemeProvider>
+              </MenuProvider>
+            </SearchProvider>
+          </ThemeProvider>
+        </TenantProvider>
       </body>
     </html>
   )

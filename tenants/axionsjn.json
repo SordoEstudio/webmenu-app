@@ -1,0 +1,66 @@
+{
+  "tenantId": "axionsjn",
+  "api": {
+    "coffeeShopId": "9b783131-32d0-48cc-bd95-7ed6784d9793"
+  },
+  "metadata": {
+    "title": "Axion San Jerónimo Norte",
+    "description": "Spot Axion - San Jerónimo Norte",
+    "language": "es"
+  },
+  "branding": {
+    "baseColor": "#D40F7D",
+    "secondary": {
+      "main": "#981d97"
+    },
+    "logo": "/logo-spot.png",
+    "logoHeader": "/logo-spot.png",
+    "defaultImage": "/logo-spot.webp",
+    "typography": {
+      "fontFamily": "Roboto, Arial, sans-serif"
+    }
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Conoce más sobre nuestro negocio",
+    "description": "Somos un negocio dedicado a ofrecer productos de calidad y un excelente servicio a nuestros clientes.",
+    "images": [],
+    "contact": [
+      {
+        "name": "phone",
+        "link": "tel:+03404460924",
+        "label": "3404 460924"
+      },
+      {
+        "name": "email",
+        "link": "mailto:contacto@ejemplo.com",
+        "label": "contacto@ejemplo.com"
+      },
+      {
+        "name": "whatsapp",
+        "link": "https://wa.me/543404460924",
+        "label": "3404 460924",
+        "social": true
+      },
+      {
+        "name": "instagram",
+        "link": "https://www.instagram.com/axionsanjeronimo",
+        "label": "/axionsanjeronimo",
+        "social": true
+      }
+    ],
+    "location": {
+      "address": "San Martin, Gral. Güemes, San Jeronimo Nte., Santa Fe",
+      "mapUrl": "https://maps.app.goo.gl/ptJqY5LKMge2vL4a7"
+    },
+    "hours": {
+      "monday": "06:00 - 22:00",
+      "tuesday": "06:00 - 22:00",
+      "wednesday": "06:00 - 22:00",
+      "thursday": "06:00 - 22:00",
+      "friday": "06:00 - 22:00",
+      "saturday": "06:00 - 22:00",
+      "sunday": "07:00 - 10:00"
+    }
+  }
+}

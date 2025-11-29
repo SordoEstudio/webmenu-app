@@ -4,7 +4,7 @@ import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ReactNode } from 'react'
 import { createAppTheme } from '@/utils/theme'
-import brandConfig from '@/data/brandConfig.json'
+import { useTenant } from '@/context/TenantContext'
 
 interface ThemeProviderProps {
   children: ReactNode
@@ -12,9 +12,17 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children, themeConfig }: ThemeProviderProps) {
-  // Usar la configuración del JSON si no se proporciona themeConfig
-  const config = themeConfig || brandConfig.BrandConfig
-  const theme = createAppTheme(config)
+  const { config } = useTenant()
+  
+  // Usar la configuración del tenant si no se proporciona themeConfig
+  const brandingConfig = themeConfig || config?.branding
+  
+  if (!brandingConfig) {
+    // Fallback mientras carga el tenant
+    return <>{children}</>
+  }
+  
+  const theme = createAppTheme(brandingConfig)
 
   return (
     <MUIThemeProvider theme={theme}>

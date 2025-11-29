@@ -1,87 +1,83 @@
-import categoriesData from '@/data/categoriesData.json'
-import productsData from '@/data/demoData.json'
+import { getApiBaseUrl } from './tenant'
 
-const API_BASE_URL =
-  'https://coffeemanagement-be-dhdzdwcfgta2a2hw.brazilsouth-01.azurewebsites.net'
+// Obtener API Base URL (variable de entorno con fallback)
+const getApiBaseUrlValue = () => {
+  return getApiBaseUrl()
+}
 
-export const fetchCategories = async () => {
+// Headers comunes para todas las llamadas a la API
+// El coffeeShopId se pasa como parámetro desde el contexto del tenant
+const getHeaders = (coffeeShopId: string): HeadersInit => ({
+  'coffeeShopId': coffeeShopId,
+  'Content-Type': 'application/json',
+}) 
+
+export const fetchCategories = async (coffeeShopId: string, apiBaseUrl?: string) => {
   try {
+    const baseUrl = apiBaseUrl || getApiBaseUrlValue()
     const response = await fetch(
-      `${API_BASE_URL}/api/v1/ProductCategories/full`
+      `${baseUrl}/api/v1/ProductCategories/full`,
+      {
+        headers: getHeaders(coffeeShopId),
+      }
     )
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
-    }
+    } 
     const data = await response.json()
-    // Si no hay error pero los datos están vacíos, usar fallback del JSON local
-    if (!Array.isArray(data) || data.length === 0) {
-      console.warn('Datos vacíos de categorías desde API, usando fallback')
-      return categoriesData.items || []
-    }
+    console.log("data de fetch categories", data);
+
     return data
   } catch (error) {
-    console.warn('Error al obtener categorías desde API, usando fallback:', error)
-    // Fallback a JSON local
-    return categoriesData.items || []
+    console.warn('Error al obtener categorías desde API:', error)
+    throw error
   }
 }
 
-export const fetchProducts = async () => {
+export const fetchProducts = async (coffeeShopId: string, apiBaseUrl?: string) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/Products/full`)
+    const baseUrl = apiBaseUrl || getApiBaseUrlValue()
+    const response = await fetch(`${baseUrl}/api/v1/Products/Full`, {
+      headers: getHeaders(coffeeShopId),
+    })
     console.log("response de fetch products", response);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
     const data = await response.json()
-    // Si no hay error pero los datos están vacíos, usar fallback del JSON local
-    if (!Array.isArray(data) || data.length === 0) {
-      console.warn('Datos vacíos de productos desde API, usando fallback')
-      return productsData.items || []
-    }
+
     return data
   } catch (error) {
-    console.warn('Error al obtener productos desde API, usando fallback:', error)
-    // Fallback a JSON local
-    return productsData.items || []
+    console.warn('Error al obtener productos desde API:', error)
+    throw error
   }
 }
 
-export const fetchAllData = async () => {
+export const fetchAllData = async (coffeeShopId: string, apiBaseUrl?: string) => {
   try {
     // Intentar obtener categorías y productos desde la API
     let [categories, products] = await Promise.all([
-      fetchCategories(),
-      fetchProducts(),
+      fetchCategories(coffeeShopId, apiBaseUrl),
+      fetchProducts(coffeeShopId, apiBaseUrl),
     ])
 
-    // Si alguna de las respuestas queda vacía, cargarla desde el JSON local
-    if (!Array.isArray(categories) || categories.length === 0) {
-      categories = categoriesData.items || []
-      console.warn('Fallback de categorías aplicado en fetchAllData')
-    }
-    if (!Array.isArray(products) || products.length === 0) {
-      products = productsData.items || []
-      console.warn('Fallback de productos aplicado en fetchAllData')
-    }
 
     return { categories, products }
   } catch (error) {
     console.warn('Error al obtener datos desde API, usando fallback:', error)
-    // Fallback a JSON local
-    return {
-      categories: categoriesData.items || [],
-      products: productsData.items || [],
-    }
+    throw error
   }
 }
 
-export const fetchProductDetails = async (id: string) => {
+export const fetchProductDetails = async (id: string, coffeeShopId: string, apiBaseUrl?: string) => {
   if (!id) {
     throw new Error('El ID del producto es requerido')
   }
   try {
-    const response = await fetch(`${API_BASE_URL}/api/v1/Products/${id}`)
+    const baseUrl = apiBaseUrl || getApiBaseUrlValue()
+    const response = await fetch(`${baseUrl}/api/v1/Products/${id}`, {
+      headers: getHeaders(coffeeShopId),
+    })
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }

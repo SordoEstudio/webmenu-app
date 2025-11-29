@@ -3,11 +3,42 @@
 import React from 'react'
 import { Box, LinearProgress, Typography } from '@mui/material'
 import AboutComponent from '@/components/AboutComponent'
-import aboutData from '@/data/aboutData.json'
+import { useTenant } from '@/context/TenantContext'
 
 export default function AboutPage() {
-  // En el futuro, esto podría venir de una API con fallback al JSON
-  const data = aboutData
+  const { config, loading } = useTenant()
+  
+  if (loading) {
+    return (
+      <Box sx={{ width: '100%', p: 4 }}>
+        <LinearProgress />
+      </Box>
+    )
+  }
+  
+  if (!config?.about) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '50vh',
+          p: 4,
+        }}
+      >
+        <Typography variant="h5" gutterBottom>
+          Información no disponible
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          No se pudo cargar la información sobre nosotros.
+        </Typography>
+      </Box>
+    )
+  }
+  
+  const data = config.about
 
   if (!data) {
     return (

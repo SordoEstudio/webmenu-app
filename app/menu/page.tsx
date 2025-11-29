@@ -50,7 +50,7 @@ export default function MenuPage() {
         <ViewToggleFab isGridView={cardView} onToggle={handleView} />
       )} */}
       <SearchFab />
-      <AboutFab />
+       <AboutFab /> 
       {/* Mostrar resultados de búsqueda si hay búsqueda activa */}
       {isSearchActive ? (
         <SearchResults />

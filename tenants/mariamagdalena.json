@@ -1,0 +1,88 @@
+{
+  "tenantId": "mariamagdalena",
+  "api": {
+    "coffeeShopId": "9b783131-32d0-48cc-bd95-7ed6784d9793"
+  },
+  "metadata": {
+    "title": "María Magdalena Coffee",
+    "description": "Cafetería María Magdalena - Menú Digital",
+    "language": "es"
+  },
+  "branding": {
+    "baseColor": "#e00c0b",
+    "secondary": {
+      "main": "#4CAF50"
+    },
+    "logo": "/_logo.png",
+    "logoHeader": "/_logo.png",
+    "defaultImage": "/_logo-rojo.webp",
+    "typography": {
+      "fontFamily": "Roboto, Arial, sans-serif"
+    }
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Conoce más sobre nuestro negocio",
+    "description": "Somos un negocio dedicado a ofrecer productos de calidad y un excelente servicio a nuestros clientes.",
+    "images": [
+      {
+        "id": "1",
+        "image": "/images/MaMaLogo.webp",
+        "alt": "Imagen del local",
+        "principal": true
+      },
+      {
+        "id": "2",
+        "image": "/logo-rojo.webp",
+        "alt": "Interior del local",
+        "principal": false
+      }
+    ],
+    "contact": [
+      {
+        "name": "phone",
+        "link": "tel:+543492646589",
+        "label": "3492 646 589"
+      },
+      {
+        "name": "email",
+        "link": "mailto:contacto@mariamagdalena.com",
+        "label": "contacto@mariamagdalena.com"
+      },
+      {
+        "name": "whatsapp",
+        "link": "https://wa.me/543492646589",
+        "label": "+54 3492 646-589",
+        "social": true
+      },
+      {
+        "name": "instagram",
+        "link": "https://www.instagram.com/mariamagdalena_coffee",
+        "label": "/mariamagdalena_coffee",
+        "social": true
+      },
+      {
+        "name": "facebook",
+        "link": "https://www.facebook.com/profile.php?id=100088412715955&sk=about",
+        "label": "/mariamagdalena_coffee",
+        "social": true
+      }
+    ],
+    "location": {
+      "address": "Av. Principal 1234",
+      "city": "San Vicente",
+      "province": "Santa Fe",
+      "postalCode": "C1234ABC",
+      "mapUrl": "https://maps.google.com/?q=Av+Principal+1234+San+Vicente"
+    },
+    "hours": {
+      "monday": "09:00 - 20:00",
+      "tuesday": "09:00 - 20:00",
+      "wednesday": "09:00 - 20:00",
+      "thursday": "09:00 - 20:00",
+      "friday": "09:00 - 20:00",
+      "saturday": "10:00 - 18:00",
+      "sunday": "Cerrado"
+    }
+  }
+}

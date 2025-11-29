@@ -1,7 +1,8 @@
 'use client'
 
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react'
-import { fetchAllData, fetchCategories, fetchProducts } from '@/utils/fetchingApi'
+import { fetchAllData} from '@/utils/fetchingApi'
+import { useTenant } from '@/context/TenantContext'
 import { LinearProgress, Box, Typography } from '@mui/material'
 
 
@@ -57,6 +58,7 @@ interface MenuProviderProps {
 }
 
 export const MenuProvider = ({ children }: MenuProviderProps) => {
+  const { coffeeShopId, apiBaseUrl, loading: tenantLoading } = useTenant()
   const [categories, setCategories] = useState<Category[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -64,14 +66,19 @@ export const MenuProvider = ({ children }: MenuProviderProps) => {
 
   useEffect(() => {
     const loadData = async () => {
+      // Esperar a que el tenant esté cargado
+      if (tenantLoading || !coffeeShopId) {
+        return
+      }
+
       try {
         setLoading(true)
         setError(null)
 
-        // Intentar obtener datos desde la API con fallback a JSON
-        const data = await fetchAllData()
-        setCategories(data.categories)
-        setProducts(data.products)
+        // Obtener datos desde la API usando configuración del tenant
+        const {categories, products} = await fetchAllData(coffeeShopId, apiBaseUrl)
+        setCategories(categories?.items || [])
+        setProducts(products?.items || [])
       } catch (err) {
         console.error('Error loading menu data:', err)
         setError(err instanceof Error ? err.message : 'Error desconocido')
@@ -81,7 +88,7 @@ export const MenuProvider = ({ children }: MenuProviderProps) => {
     }
 
     loadData()
-  }, [])
+  }, [coffeeShopId, apiBaseUrl, tenantLoading])
 
   // Función para obtener productos por categoría
   const getProductsByCategory = useMemo(
@@ -89,8 +96,7 @@ export const MenuProvider = ({ children }: MenuProviderProps) => {
       return products.filter(
         (product) =>
           product.productCategoryId === categoryId &&
-          product.visible &&
-          product.stock
+          product.visible
       )
     },
     [products]

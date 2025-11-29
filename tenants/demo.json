@@ -1,0 +1,69 @@
+{
+  "tenantId": "demo",
+  "api": {
+    "coffeeShopId": "9b783131-32d0-48cc-bd95-7ed6784d9793"
+  },
+  "metadata": {
+    "title": "Demo - WebMenu Digital",
+    "description": "Aplicación demo para gestión de menús digitales",
+    "language": "es"
+  },
+  "branding": {
+    "baseColor": "#350156",
+    "secondary": {
+      "main": "#f5bb06"
+    },
+    "logo": "/logo-demo-.png",
+    "logoHeader": "/logo-demo.png",
+    "defaultImage": "/logo-demo.png",
+    "typography": {
+      "fontFamily": "Roboto, Arial, sans-serif"
+    }
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Conoce más sobre nuestro negocio",
+    "description": "Esta es una aplicación demo para mostrar las capacidades del sistema de menús digitales.",
+    "images": [],
+    "contact": [
+      {
+        "name": "phone",
+        "link": "tel:+541112345678",
+        "label": "+54 11 1234-5678"
+      },
+      {
+        "name": "email",
+        "link": "mailto:demo@webmenu.com",
+        "label": "demo@webmenu.com"
+      },
+      {
+        "name": "whatsapp",
+        "link": "https://wa.me/541112345678",
+        "label": "+54 11 1234-5678",
+        "social": true
+      },
+      {
+        "name": "instagram",
+        "link": "https://www.instagram.com/webmenu_demo",
+        "label": "/webmenu_demo",
+        "social": true
+      }
+    ],
+    "location": {
+      "address": "Calle Demo 123",
+      "city": "Buenos Aires",
+      "province": "Buenos Aires",
+      "postalCode": "C1000",
+      "mapUrl": "https://maps.google.com/?q=Calle+Demo+123+Buenos+Aires"
+    },
+    "hours": {
+      "monday": "09:00 - 18:00",
+      "tuesday": "09:00 - 18:00",
+      "wednesday": "09:00 - 18:00",
+      "thursday": "09:00 - 18:00",
+      "friday": "09:00 - 18:00",
+      "saturday": "10:00 - 14:00",
+      "sunday": "Cerrado"
+    }
+  }
+}

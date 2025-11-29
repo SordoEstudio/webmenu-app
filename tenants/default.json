@@ -1,0 +1,58 @@
+{
+  "tenantId": "default",
+  "api": {
+    "coffeeShopId": "9b783131-32d0-48cc-bd95-7ed6784d9793"
+  },
+  "metadata": {
+    "title": "WebMenu Digital",
+    "description": "Aplicación web para gestión de menús digitales",
+    "language": "es"
+  },
+  "branding": {
+    "baseColor": "#D40F7D",
+    "secondary": {
+      "main": "#981d97"
+    },
+    "logo": "/logo-spot.png",
+    "logoHeader": "/logo-spot.png",
+    "defaultImage": "/logo-spot.webp",
+    "typography": {
+      "fontFamily": "Roboto, Arial, sans-serif"
+    }
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Conoce más sobre nuestro negocio",
+    "description": "Somos un negocio dedicado a ofrecer productos de calidad y un excelente servicio a nuestros clientes.",
+    "images": [],
+    "contact": [
+      {
+        "name": "phone",
+        "link": "tel:+541112345678",
+        "label": "+54 11 1234-5678"
+      },
+      {
+        "name": "email",
+        "link": "mailto:contacto@ejemplo.com",
+        "label": "contacto@ejemplo.com"
+      }
+    ],
+    "location": {
+      "address": "Av. Principal 1234",
+      "city": "Ciudad",
+      "province": "Provincia",
+      "postalCode": "C1234ABC",
+      "mapUrl": "https://maps.google.com/?q=Av+Principal+1234"
+    },
+    "hours": {
+      "monday": "09:00 - 20:00",
+      "tuesday": "09:00 - 20:00",
+      "wednesday": "09:00 - 20:00",
+      "thursday": "09:00 - 20:00",
+      "friday": "09:00 - 20:00",
+      "saturday": "10:00 - 18:00",
+      "sunday": "Cerrado"
+    }
+  }
+}
+

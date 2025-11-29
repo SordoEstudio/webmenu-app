@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import ImageModal from '@/components/ImageModal'
 import IconRender from '@/components/IconRender'
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaComment, FaArrowRight, FaArrowLeft } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaClock, FaComment, FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 
 interface AboutData {
   title: string
@@ -28,15 +28,13 @@ interface AboutData {
     principal?: boolean
   }>
   contact?: Array<{
-    icon: string
+    name: string
     link: string
     label: string
+    media?: boolean
   }>
   location?: {
     address?: string
-    city?: string
-    province?: string
-    postalCode?: string
     mapUrl?: string
   }
   hours?: {
@@ -69,7 +67,8 @@ const AboutComponent = ({ data }: AboutComponentProps) => {
   const isValidImageUrl = (url: string | undefined) => {
     return url && (url.startsWith('http') || url.startsWith('/'))
   }
-
+// Fallback de Location Rul
+const fallbackLocationUrl = (data.location?.mapUrl) ? data.location?.mapUrl : `https://maps.app.goo.gl/${data.location?.address?.replace(/ /g, '+') || ''}`
   // Manejar múltiples imágenes
   const images =
     data.images && data.images.length > 0
@@ -264,24 +263,7 @@ const AboutComponent = ({ data }: AboutComponentProps) => {
             bgcolor: 'background.paper',
           }}
         >
-  {/*         <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              mb: 2,
-            }}
-          >
-            <FaMapMarkerAlt
-              style={{
-                marginRight: 12,
-                color: theme.palette.primary.main,
-                fontSize: 24,
-              }}
-            />
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-              Ubicación
-            </Typography>
-          </Box> */}
+
         {data.location && (<Box
             sx={{
               display: 'flex'
@@ -295,7 +277,7 @@ const AboutComponent = ({ data }: AboutComponentProps) => {
                             }}
                             />
                                         <Link
-                                        href={data.location.mapUrl}
+                                        href={fallbackLocationUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         sx={{
@@ -305,7 +287,7 @@ const AboutComponent = ({ data }: AboutComponentProps) => {
                                             fontWeight: 'medium',
                                         }}
                                         >
-                                          <Typography variant="body1">{data.location.address} - {data.location.city} - {data.location.province} 
+                                          <Typography variant="body1">{data.location.address}
                                           </Typography>
                             
                             </Link>
@@ -408,63 +390,29 @@ const AboutComponent = ({ data }: AboutComponentProps) => {
           </Box>
         
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-{data.contact.map((contact, i) => (
-  <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 1 }} color="primary.main">
-    <IconRender icon={contact.icon} />
-    <Link href={contact.link} target="_blank" rel="noopener noreferrer" color="text.primary" sx={{textDecoration: 'none'}}>
-      {contact.label}
-    </Link>
-  </Box>
-))}
-         
+            {data.contact.map((contact, i) => (
+              <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 1 }} color="primary.main">
+                <IconRender 
+                  icon={contact.name}
+                  style={{ 
+                    color: theme.palette.primary.main,
+                    fontSize: 20 
+                  }} 
+                />
+                <Link 
+                  href={contact.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  color="text.primary" 
+                  sx={{ textDecoration: 'none' }}
+                >
+                  {contact.label}
+                </Link>
+              </Box>
+            ))}
           </Box>
         </Card>
       )}
-      {/* Redes sociales */}
-{/*       {data.socialMedia && data.socialMedia.length > 0 && (
-        <Paper
-          elevation={2}
-          sx={{
-            p: { xs: 2, sm: 3 },
-            borderRadius: 2,
-            bgcolor: 'background.paper',
-          }}
-        >
-          <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
-            Síguenos en nuestras redes
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              gap: 2,
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-            }}
-          >
-            {data.socialMedia.map((social, index) => (
-              <IconButton
-                key={`${social.name}-${index}`}
-                component="a"
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.name}
-                sx={{
-                  color: 'primary.main',
-                  border: 1,
-                  borderColor: 'divider',
-                  '&:hover': {
-                    bgcolor: 'primary.light',
-                    borderColor: 'primary.main',
-                  },
-                }}
-              >
-                <IconRender icon={social.icon} color="white"/>
-              </IconButton>
-            ))}
-          </Box>
-        </Paper>
-      )} */}
 
       {/* Modal de imagen */}
       <ImageModal

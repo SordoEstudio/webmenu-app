@@ -2,10 +2,11 @@
 
 import { AppBar, Box, Link, Typography } from '@mui/material'
 import Social from '@/components/Social'
-/* import { useClient } from '@/context/ClientContext'
- */
-import socialLinks from '@/data/social.json'
+import { useTenant } from '@/context/TenantContext'
+
 const Footer = () => {
+  const { config } = useTenant()
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -18,7 +19,9 @@ const Footer = () => {
           justifyContent: 'space-between',
         }}
       >
-        <Social sx={{ marginY: 'auto' }} socialLinks={socialLinks} />
+        {config?.about?.contact && (
+          <Social sx={{ marginY: 'auto' }} contact={config.about.contact} />
+        )}
         <Typography
           align="center"
           sx={{ alignContent: 'center' }}
