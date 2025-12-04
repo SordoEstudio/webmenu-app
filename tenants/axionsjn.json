@@ -1,7 +1,7 @@
 {
   "tenantId": "axionsjn",
   "api": {
-    "coffeeShopId": "9b783131-32d0-48cc-bd95-7ed6784d9793"
+    "coffeeShopId": "02c128d4-64ee-499b-b7dc-4f2553ceabfc"
   },
   "metadata": {
     "title": "Axion San Jerónimo Norte",
@@ -13,9 +13,9 @@
     "secondary": {
       "main": "#981d97"
     },
-    "logo": "/logo-spot.png",
-    "logoHeader": "/logo-spot.png",
-    "defaultImage": "/logo-spot.webp",
+    "logo": "/images/axionsjn/logoTransparente.png",
+    "logoHeader": "/images/axionsjn/logoTransparente.png",
+    "defaultImage": "/images/axionsjn/logo.webp",
     "typography": {
       "fontFamily": "Roboto, Arial, sans-serif"
     }
@@ -24,23 +24,33 @@
     "title": "Sobre Nosotros",
     "subtitle": "Conoce más sobre nuestro negocio",
     "description": "Somos un negocio dedicado a ofrecer productos de calidad y un excelente servicio a nuestros clientes.",
-    "images": [],
+    "images": [
+      {
+        "id": "1",
+        "image": "/images/axionsjn/about-02.webp",
+        "alt": "Exterior del local"
+      },
+      {
+        "id": "2",
+        "image": "/images/axionsjn/about-01.webp",
+        "alt": "Interior del local"
+      }
+    ],
     "contact": [
       {
         "name": "phone",
-        "link": "tel:+03404460924",
-        "label": "3404 460924"
+        "link": "tel:3404592109",
+        "label": "3404 592-109"
+      },{
+        "name": "whatsapp",
+        "link": "https://wa.me/543404592109",
+        "label": "+54 3404 592-109",
+        "social": true
       },
       {
         "name": "email",
-        "link": "mailto:contacto@ejemplo.com",
-        "label": "contacto@ejemplo.com"
-      },
-      {
-        "name": "whatsapp",
-        "link": "https://wa.me/543404460924",
-        "label": "3404 460924",
-        "social": true
+        "link": "mailto:essoservicentro@hotmail.com",
+        "label": "essoservicentro@hotmail.com"
       },
       {
         "name": "instagram",
@@ -60,7 +70,7 @@
       "thursday": "06:00 - 22:00",
       "friday": "06:00 - 22:00",
       "saturday": "06:00 - 22:00",
-      "sunday": "07:00 - 10:00"
+      "sunday": "07:00 - 22:00"
     }
   }
 }

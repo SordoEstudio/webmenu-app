@@ -13,9 +13,9 @@
     "secondary": {
       "main": "#4CAF50"
     },
-    "logo": "/_logo.png",
-    "logoHeader": "/_logo.png",
-    "defaultImage": "/_logo-rojo.webp",
+    "logo": "/images/mariamagdalena/logoTransparente.png",
+    "logoHeader": "/images/mariamagdalena/logoTransparente.png",
+    "defaultImage": "/images/mariamagdalena/logo.webp",
     "typography": {
       "fontFamily": "Roboto, Arial, sans-serif"
     }
@@ -27,15 +27,9 @@
     "images": [
       {
         "id": "1",
-        "image": "/images/MaMaLogo.webp",
+        "image": "/images/mariamagdalena/logo.webp",
         "alt": "Imagen del local",
         "principal": true
-      },
-      {
-        "id": "2",
-        "image": "/logo-rojo.webp",
-        "alt": "Interior del local",
-        "principal": false
       }
     ],
     "contact": [

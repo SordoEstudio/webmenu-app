@@ -6,16 +6,13 @@ import {
   Typography,
   useTheme,
   Avatar,
-  Divider,
   Link,
-  IconButton,
   Paper,
   Card,
-  CardHeader,
 } from '@mui/material'
 import ImageModal from '@/components/ImageModal'
 import IconRender from '@/components/IconRender'
-import { FaMapMarkerAlt, FaClock, FaComment, FaArrowRight, FaArrowLeft } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaClock, FaComment, FaChevronRight,FaChevronLeft } from 'react-icons/fa'
 
 interface AboutData {
   title: string
@@ -75,7 +72,7 @@ const fallbackLocationUrl = (data.location?.mapUrl) ? data.location?.mapUrl : `h
       ? data.images.map((img) => img.image).filter(Boolean)
       : []
 
-  const currentImage: string = images[currentImageIndex] || theme.extras?.defaultImage || '/logo.png'
+  const currentImage: string = images[currentImageIndex] || theme.extras?.defaultImage || ''
 
   const handleNextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length)
@@ -178,7 +175,7 @@ const fallbackLocationUrl = (data.location?.mapUrl) ? data.location?.mapUrl : `h
                   },
                 }}
               >
-                <FaArrowLeft />
+                <FaChevronLeft />
               </Box>
               <Box
                 onClick={handleNextImage}
@@ -202,7 +199,7 @@ const fallbackLocationUrl = (data.location?.mapUrl) ? data.location?.mapUrl : `h
                   },
                 }}
               >
-                <FaArrowRight />
+                <FaChevronRight />
               </Box>
               {/* Indicador de imágenes */}
               <Box

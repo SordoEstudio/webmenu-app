@@ -31,6 +31,7 @@ interface Product {
   visible: boolean
   stock: boolean
   featured: boolean
+  displayOrder?: number
 }
 
 interface MenuContextType {
@@ -77,8 +78,35 @@ export const MenuProvider = ({ children }: MenuProviderProps) => {
 
         // Obtener datos desde la API usando configuración del tenant
         const {categories, products} = await fetchAllData(coffeeShopId, apiBaseUrl)
-        setCategories(categories?.items || [])
-        setProducts(products?.items || [])
+        
+        // Ordenar categorías: primero destacadas, luego no destacadas, ambas por displayOrder
+        const sortedCategories = (categories?.items || []).sort((a: Category, b: Category) => {
+          // Primero ordenar por featured (destacadas primero: true antes que false)
+          if (a.featured !== b.featured) {
+            return a.featured ? -1 : 1
+          }
+          
+          // Si ambas tienen el mismo estado de featured, ordenar por displayOrder
+          const orderA = a.displayOrder ?? Number.MAX_SAFE_INTEGER
+          const orderB = b.displayOrder ?? Number.MAX_SAFE_INTEGER
+          return orderA - orderB
+        })
+        
+        // Ordenar productos: primero destacados, luego no destacados, ambos por displayOrder
+        const sortedProducts = (products?.items || []).sort((a: Product, b: Product) => {
+          // Primero ordenar por featured (destacados primero: true antes que false)
+          if (a.featured !== b.featured) {
+            return a.featured ? -1 : 1
+          }
+          
+          // Si ambos tienen el mismo estado de featured, ordenar por displayOrder
+          const orderA = a.displayOrder ?? Number.MAX_SAFE_INTEGER
+          const orderB = b.displayOrder ?? Number.MAX_SAFE_INTEGER
+          return orderA - orderB
+        })
+        
+        setCategories(sortedCategories)
+        setProducts(sortedProducts)
       } catch (err) {
         console.error('Error loading menu data:', err)
         setError(err instanceof Error ? err.message : 'Error desconocido')
@@ -90,7 +118,7 @@ export const MenuProvider = ({ children }: MenuProviderProps) => {
     loadData()
   }, [coffeeShopId, apiBaseUrl, tenantLoading])
 
-  // Función para obtener productos por categoría
+  // Función para obtener productos por categoría (ya ordenados por displayOrder)
   const getProductsByCategory = useMemo(
     () => (categoryId: string) => {
       return products.filter(
@@ -98,6 +126,7 @@ export const MenuProvider = ({ children }: MenuProviderProps) => {
           product.productCategoryId === categoryId &&
           product.visible
       )
+      // Los productos ya vienen ordenados por displayOrder desde el estado
     },
     [products]
   )

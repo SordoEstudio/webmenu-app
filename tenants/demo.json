@@ -13,9 +13,9 @@
     "secondary": {
       "main": "#f5bb06"
     },
-    "logo": "/logo-demo-.png",
-    "logoHeader": "/logo-demo.png",
-    "defaultImage": "/logo-demo.png",
+    "logo": "images/demo/logo-demo.png",
+    "logoHeader": "images/demo/logo-demo.png",
+    "defaultImage": "images/demo/logo-demo.png",
     "typography": {
       "fontFamily": "Roboto, Arial, sans-serif"
     }

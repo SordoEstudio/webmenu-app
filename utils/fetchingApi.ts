@@ -11,12 +11,11 @@ const getHeaders = (coffeeShopId: string): HeadersInit => ({
   'coffeeShopId': coffeeShopId,
   'Content-Type': 'application/json',
 }) 
-
 export const fetchCategories = async (coffeeShopId: string, apiBaseUrl?: string) => {
   try {
     const baseUrl = apiBaseUrl || getApiBaseUrlValue()
     const response = await fetch(
-      `${baseUrl}/api/v1/ProductCategories/full`,
+      `${baseUrl}/api/v1/ProductCategories`,
       {
         headers: getHeaders(coffeeShopId),
       }
