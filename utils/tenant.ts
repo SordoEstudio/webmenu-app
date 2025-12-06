@@ -50,15 +50,15 @@ export interface TenantConfig {
       postalCode?: string
       mapUrl?: string
     }
-    hours?: {
-      monday?: string
-      tuesday?: string
-      wednesday?: string
-      thursday?: string
-      friday?: string
-      saturday?: string
-      sunday?: string
-    }
+    hours?: Array<{
+      id: string
+      isClosed: boolean
+      days: number[]
+      timeSlots: Array<{
+        open: string
+        close: string
+      }>
+    }>
   }
 }
 
