@@ -77,8 +77,8 @@ export const createAppTheme = (themeConfig?: ThemeConfig) => {
   const defaultTypographyBlack = '#1a1a1a'
 
   // Factores por defecto para variaciones de color
-  const defaultLightFactor = 0.2
-  const defaultUltraLightFactor = 0.3
+  const defaultLightFactor = 0.1
+  const defaultUltraLightFactor = 0.7
   const defaultDarkFactor = 0.2
 
   // Generar colores primarios automáticamente

@@ -13,6 +13,7 @@ import {
 import ImageModal from '@/components/ImageModal'
 import IconRender from '@/components/IconRender'
 import { FaMapMarkerAlt, FaClock, FaComment, FaChevronRight,FaChevronLeft } from 'react-icons/fa'
+import { formatDaysLabel } from '@/utils/dayFormatter'
 
 interface AboutData {
   title: string
@@ -34,15 +35,15 @@ interface AboutData {
     address?: string
     mapUrl?: string
   }
-  hours?: {
-    monday?: string
-    tuesday?: string
-    wednesday?: string
-    thursday?: string
-    friday?: string
-    saturday?: string
-    sunday?: string
-  }
+  hours?: Array<{
+    id: string
+    isClosed: boolean
+    days: number[]
+    timeSlots: Array<{
+      open: string
+      close: string
+    }>
+  }>
   socialMedia?: Array<{
     name: string
     url: string
@@ -90,15 +91,30 @@ const fallbackLocationUrl = (data.location?.mapUrl) ? data.location?.mapUrl : `h
     setIsModalOpen(false)
   }
 
-  const daysOfWeek = [
-    { key: 'monday', label: 'Lunes' },
-    { key: 'tuesday', label: 'Martes' },
-    { key: 'wednesday', label: 'Miércoles' },
-    { key: 'thursday', label: 'Jueves' },
-    { key: 'friday', label: 'Viernes' },
-    { key: 'saturday', label: 'Sábado' },
-    { key: 'sunday', label: 'Domingo' },
-  ]
+  // Función para formatear los horarios agrupados
+  const formatHoursGroup = (group: {
+    isClosed: boolean
+    days: number[]
+    timeSlots: Array<{ open: string; close: string }>
+  }) => {
+    if (group.isClosed) {
+      return 'Cerrado'
+    }
+
+    if (group.timeSlots.length === 0) {
+      return 'Cerrado'
+    }
+
+    // Formatear cada timeSlot
+    const formattedSlots = group.timeSlots.map((slot) => {
+      return `${slot.open} a ${slot.close}`
+    })
+
+    return formattedSlots.map((slot, idx) => (
+      <span key={idx} style={{ display: 'block' }}>{slot}</span>
+    ))
+  }
+
 
   return (
     <Box
@@ -295,7 +311,7 @@ const fallbackLocationUrl = (data.location?.mapUrl) ? data.location?.mapUrl : `h
       )}
 
       {/* Horarios */}
-      {data.hours && (
+      {data.hours && Array.isArray(data.hours) && data.hours.length > 0 && (
         <Paper
           elevation={2}
           sx={{
@@ -323,31 +339,34 @@ const fallbackLocationUrl = (data.location?.mapUrl) ? data.location?.mapUrl : `h
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-            {daysOfWeek.map((day) => {
-              const hours = data.hours?.[day.key as keyof typeof data.hours]
-              if (!hours) return null
+            {data.hours.map((group) => {
+              const daysLabel = formatDaysLabel(group.days)
+              const hoursText = formatHoursGroup(group)
+              
               return (
                 <Box
-                  key={day.key}
+                  key={group.id}
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     py: 0.5,
+                    flexWrap: 'wrap',
+                    gap: 1,
                   }}
                 >
-                  <Typography variant="body1">{day.label}</Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 'medium' }}>
+                    {daysLabel}
+                  </Typography>
                   <Typography
                     variant="body1"
                     sx={{
-                      fontWeight: hours === 'Cerrado' ? 'normal' : 'medium',
-                      color:
-                        hours === 'Cerrado'
-                          ? 'text.secondary'
-                          : 'text.primary',
+                      fontWeight: group.isClosed ? 'normal' : 'medium',
+                      color: group.isClosed ? 'text.secondary' : 'text.primary',
+                      textAlign: 'right',
                     }}
                   >
-                    {hours}
+                    {hoursText}
                   </Typography>
                 </Box>
               )

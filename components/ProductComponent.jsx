@@ -14,6 +14,7 @@ import Link from "next/link";
 import ImageModal from "@/components/ImageModal";
 
 import { formatPrice } from "../utils/formatters";
+import { FaStar } from "react-icons/fa";
 
 // Estilos centralizados
 const styles = {
@@ -102,8 +103,8 @@ const ProductComponent = ({ product }) => {
     <>
       <ListItem
         sx={{
-          backgroundColor: product.featured ? "primary.ultraLight" : "inherit",
-        }}
+          backgroundColor: product.featured ? "primary.ultraLight" : "inherit",borderRadius: 1,
+        }} 
       >
         <Box
           sx={{
@@ -121,6 +122,28 @@ const ProductComponent = ({ product }) => {
               flexGrow: 1,
             }}
           >
+                      {product.featured && (
+            <Box
+              sx={{
+                position: "absolute",
+                top: 6,
+                left: 10,
+                bgcolor: "primary.main",
+                color: "primary.contrastText",
+                px: 0.5,
+                py: 0.5,
+                borderRadius: '50%',
+                display: "flex",
+                alignItems: "center",
+                fontSize: "0.75rem",
+                fontWeight: "bold",
+                zIndex: 1,
+              }}
+            >
+              <FaStar sx={{ fontSize: "1rem", mr: 0.5 }} />
+              {/* Destacado */}
+            </Box>
+          )}
             <ListItemAvatar sx={styles.listItemAvatar}>
               <Avatar
                 sx={styles.avatar(product.stock)}
@@ -219,7 +242,7 @@ const ProductComponent = ({ product }) => {
           description={product.name}
         />
       </ListItem>
-      <Divider variant="middle" component="li" />
+     {!product.featured && <Divider variant="middle" component="li" />}
     </>
   );
 };

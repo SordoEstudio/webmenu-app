@@ -38,9 +38,7 @@ const CategoryCard = ({ category, avatarView }) => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            backgroundColor: category.featured
-              ? "primary.ultraLight"
-              : "inherit",
+            backgroundColor:  "inherit",
             position: "relative",
           }}
         >
@@ -93,7 +91,7 @@ const CategoryCard = ({ category, avatarView }) => {
               variant={category.featured ? "h5" : "body1"}
               align="center"
               sx={{
-                color: category.featured ? "primary.dark" : "inherit",
+                color: category.featured ? "primary.main" : "inherit",
                 fontWeight: category.featured ? "bold" : "normal",
               }}
             >

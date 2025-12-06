@@ -78,6 +78,11 @@ export default function CategoryProductsPage() {
           {category.name}
    
         </Typography>
+        {category.subtitle && (
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+            {category.subtitle}
+          </Typography>
+        )}
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
           Esta sección estará disponible muy pronto!
         </Typography>
@@ -100,14 +105,19 @@ export default function CategoryProductsPage() {
 
   return (
     <>
-      <Box sx={{ position:"sticky", top:75, zIndex:1000 ,backgroundColor:theme.palette.background.default,boxShadow: '0 0 8px rgba(0, 0, 0, 0.1)', width:'100%'}}>
-<Typography variant="h6" gutterBottom sx={{color:'grey.500',textAlign:'center'}}>
+      <Box sx={{ position:"sticky", top:70, zIndex:1000 ,backgroundColor:theme.palette.background.default,boxShadow: '0 0 8px rgba(0, 0, 0, 0.1)', width:'100%', paddingTop:1}}>
+<Typography variant="h6"  sx={{color:'grey.500',textAlign:'center'}}>
   {category.name} 
 </Typography>
+{category.subtitle && (
+  <Typography variant="body1"  gutterBottom color="text.secondary" sx={{ textAlign:'center'}}>
+    {category.subtitle}
+  </Typography>
+)}
       </Box>
     <Box sx={{ px: { xs: 2, sm: 3, md: 4 }, py: 0, textAlign: 'center' }}>
 
-      <List sx={{ mt: 2, mb: 6 }}>
+      <List sx={{ mt: 2, mb: 2 }}>
         {products.map((product) => (
           <ProductComponent key={product.id} product={product} />
         ))}

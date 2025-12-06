@@ -41,7 +41,8 @@
         "name": "phone",
         "link": "tel:3404592109",
         "label": "3404 592-109"
-      },{
+      },
+      {
         "name": "whatsapp",
         "link": "https://wa.me/543404592109",
         "label": "+54 3404 592-109",
@@ -63,14 +64,30 @@
       "address": "San Martin, Gral. Güemes, San Jeronimo Nte., Santa Fe",
       "mapUrl": "https://maps.app.goo.gl/ptJqY5LKMge2vL4a7"
     },
-    "hours": {
-      "monday": "06:00 - 22:00",
-      "tuesday": "06:00 - 22:00",
-      "wednesday": "06:00 - 22:00",
-      "thursday": "06:00 - 22:00",
-      "friday": "06:00 - 22:00",
-      "saturday": "06:00 - 22:00",
-      "sunday": "07:00 - 22:00"
+    "hours": [
+      {
+        "id": "group-1",
+        "isClosed": false,
+        "days": [1,2,3,4,5,6],
+        "timeSlots": [
+          {
+            "open": "06:00",
+            "close": "22:00"
+          }
+        ]
+      },
+      {
+        "id": "group-2",
+        "isClosed": false,
+        "days": [7,8],
+        "timeSlots": [
+          {
+            "open": "07:00",
+            "close": "22:00"
+          }
+        ]
+      }
+    ]
     }
   }
-}
+

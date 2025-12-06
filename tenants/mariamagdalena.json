@@ -34,19 +34,14 @@
     ],
     "contact": [
       {
-        "name": "phone",
-        "link": "tel:+543492646589",
-        "label": "3492 646 589"
-      },
-      {
         "name": "email",
         "link": "mailto:contacto@mariamagdalena.com",
         "label": "contacto@mariamagdalena.com"
       },
       {
         "name": "whatsapp",
-        "link": "https://wa.me/543492646589",
-        "label": "+54 3492 646-589",
+        "link": "https://wa.me/543492306299",
+        "label": "+54 3492 306-299",
         "social": true
       },
       {
@@ -69,14 +64,42 @@
       "postalCode": "C1234ABC",
       "mapUrl": "https://maps.google.com/?q=Av+Principal+1234+San+Vicente"
     },
-    "hours": {
-      "monday": "09:00 - 20:00",
-      "tuesday": "09:00 - 20:00",
-      "wednesday": "09:00 - 20:00",
-      "thursday": "09:00 - 20:00",
-      "friday": "09:00 - 20:00",
-      "saturday": "10:00 - 18:00",
-      "sunday": "Cerrado"
-    }
+    "hours": [
+        {
+          "id": "group-1",
+          "isClosed": true,
+          "days": [1],
+          "timeSlots": [
+
+          ]
+        },{
+          "id": "group-2",
+          "isClosed": false,
+          "days": [2,3,4,5],
+          "timeSlots": [
+            {
+              "open": "07:00",
+              "close": "12:30"
+            },{
+              "open": "17:00",
+              "close": "01:00"
+            }
+          ]
+        },{
+          "id": "group-3",
+          "isClosed": false,
+          "days": [6,7],
+          "timeSlots": [
+            {
+              "open": "08:00",
+              "close": "12:30"
+            },{
+              "open": "17:00",
+              "close": "01:00"
+            }
+          ]
+        }
+      ] 
   }
 }
+

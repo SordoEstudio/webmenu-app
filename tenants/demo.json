@@ -13,9 +13,9 @@
     "secondary": {
       "main": "#f5bb06"
     },
-    "logo": "images/demo/logo-demo.png",
-    "logoHeader": "images/demo/logo-demo.png",
-    "defaultImage": "images/demo/logo-demo.png",
+    "logo": "/images/demo/logo-demo.png",
+    "logoHeader": "/images/demo/logo-demo.png",
+    "defaultImage": "/images/demo/logo-demo.png",
     "typography": {
       "fontFamily": "Roboto, Arial, sans-serif"
     }
@@ -24,7 +24,18 @@
     "title": "Sobre Nosotros",
     "subtitle": "Conoce más sobre nuestro negocio",
     "description": "Esta es una aplicación demo para mostrar las capacidades del sistema de menús digitales.",
-    "images": [],
+    "images": [
+      {
+        "id": "1",
+        "image": "/images/demo/about-01.jpg",
+        "alt": "Frente del local"
+      },
+      {
+        "id": "2",
+        "image": "/images/demo/about-02.jpg",
+        "alt": "Interior del local"
+      }
+    ],
     "contact": [
       {
         "name": "phone",
@@ -33,37 +44,82 @@
       },
       {
         "name": "email",
-        "link": "mailto:demo@webmenu.com",
-        "label": "demo@webmenu.com"
+        "link": "mailto:contacto@harvestech.dev",
+        "label": "contacto@harvestech.dev"
       },
       {
         "name": "whatsapp",
-        "link": "https://wa.me/541112345678",
-        "label": "+54 11 1234-5678",
+        "link": "https://wa.me/543492635571",
+        "label": "3492 635-571",
         "social": true
       },
       {
         "name": "instagram",
-        "link": "https://www.instagram.com/webmenu_demo",
-        "label": "/webmenu_demo",
+        "link": "https://www.instagram.com/harvestech.dev",
+        "label": "/harvestech.dev",
+        "social": true
+      },
+      {
+        "name": "facebook",
+        "link": "https://www.facebook.com/harvestech.dev",
+        "label": "/harvestech.dev",
+        "social": true
+      },
+      {
+        "name": "linkedin",
+        "link": "https://www.linkedin.com/company/harvestech",
+        "label": "/harvestech.dev",
         "social": true
       }
     ],
     "location": {
       "address": "Calle Demo 123",
-      "city": "Buenos Aires",
-      "province": "Buenos Aires",
-      "postalCode": "C1000",
-      "mapUrl": "https://maps.google.com/?q=Calle+Demo+123+Buenos+Aires"
+      "city": "San Vicente",
+      "province": "Santa Fe",
+      "postalCode": "2447",
+      "mapUrl": "https://maps.app.goo.gl/LsHkFbU9Yk9vY7G76"
     },
-    "hours": {
-      "monday": "09:00 - 18:00",
-      "tuesday": "09:00 - 18:00",
-      "wednesday": "09:00 - 18:00",
-      "thursday": "09:00 - 18:00",
-      "friday": "09:00 - 18:00",
-      "saturday": "10:00 - 14:00",
-      "sunday": "Cerrado"
-    }
+    "hours": [
+      {
+        "id": "group-1",
+        "isClosed": false,
+        "days": [1,2,3,4],
+    
+        "timeSlots": [
+          {
+            "open": "09:00",
+            "close": "18:00"
+          }
+        ]
+      },
+      {
+        "id": "group-2",
+        "isClosed": false,
+        "days": [5,7],
+    
+        "timeSlots": [
+          {
+            "open": "10:00",
+            "close": "14:00"
+          }
+        ]
+      },{
+        "id": "group-3",
+        "isClosed": false,
+        "days": [6],
+        "timeSlots": [
+          {
+            "open": "10:00",
+            "close": "16:00"
+          }
+        ]
+      },{
+        "id": "group-4",
+        "isClosed": true,
+        "days": [8],
+        "timeSlots": []
+      }
+      
+    ]
   }
 }
