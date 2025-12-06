@@ -27,12 +27,12 @@
     "images": [
       {
         "id": "1",
-        "image": "/images/demo/about-01.jpg",
+        "image": "/images/demo/about-01.webp",
         "alt": "Frente del local"
       },
       {
         "id": "2",
-        "image": "/images/demo/about-02.jpg",
+        "image": "/images/demo/about-02.webp",
         "alt": "Interior del local"
       }
     ],

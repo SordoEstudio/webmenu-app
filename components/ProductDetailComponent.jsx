@@ -5,8 +5,7 @@ import { Box, Typography, useTheme, Avatar } from "@mui/material";
 import { formatPrice } from "../utils/formatters";
 import ImageModal from "@/components/ImageModal";
 const ProductDetailComponent = ({ product }) => {
-
- /*    product =product?product:productData; */
+  /*    product =product?product:productData; */
   const theme = useTheme();
 
   // Manejo de variantes (si existen)
@@ -29,26 +28,9 @@ const ProductDetailComponent = ({ product }) => {
     ? product.image
     : theme.extras?.defaultImage;
 
-  // Manejar múltiples imágenes si existen
-  const images =
-    product.images && product.images.length > 0
-      ? product.images.map((img) => img.image || img).filter(Boolean)
-      : [imageUrl];
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const currentImage = images[currentImageIndex] || imageUrl;
-
   const handleVariantChange = (variant) => {
     setSelectedVariant(variant);
     setCurrentPrice(variant.price);
-  };
-
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -82,104 +64,14 @@ const ProductDetailComponent = ({ product }) => {
           justifyContent: "center",
           alignItems: "center",
         }}
-      >   
-        {isValidImageUrl(currentImage) ? (
-          <img src={currentImage} alt={product.name} style={{ objectFit: "contain" }} onClick={handleOpenModal} />
-        ) : (
-          <Avatar
+      >
+        {isValidImageUrl(imageUrl) && (
+          <img
+            src={imageUrl}
             alt={product.name}
-            src={currentImage}
-            variant="square"
-            sx={{
-              width: "100%",
-              height: "100%",
-              borderRadius: 2,
-            }}
+            style={{ objectFit: "contain" }}
             onClick={handleOpenModal}
           />
-        )}
-
-        {/* Navegación de imágenes si hay múltiples */}
-        {images.length > 1 && (
-          <>
-            <Box
-              onClick={handlePrevImage}
-              sx={{
-                position: "absolute",
-                left: 8,
-                top: "50%",
-                transform: "translateY(-50%)",
-                bgcolor: "rgba(0, 0, 0, 0.5)",
-                color: "white",
-                borderRadius: "50%",
-                width: 40,
-                height: 40,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                zIndex: 1,
-                "&:hover": {
-                  bgcolor: "rgba(0, 0, 0, 0.7)",
-                },
-              }}
-            >
-              ←
-            </Box>
-            <Box
-              onClick={handleNextImage}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: "50%",
-                transform: "translateY(-50%)",
-                bgcolor: "rgba(0, 0, 0, 0.5)",
-                color: "white",
-                borderRadius: "50%",
-                width: 40,
-                height: 40,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                zIndex: 1,
-                "&:hover": {
-                  bgcolor: "rgba(0, 0, 0, 0.7)",
-                },
-              }}
-            >
-              →
-            </Box>
-            {/* Indicador de imágenes */}
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: 8,
-                left: "50%",
-                transform: "translateX(-50%)",
-                display: "flex",
-                gap: 1,
-                zIndex: 1,
-              }}
-            >
-              {images.map((_, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: "50%",
-                    bgcolor:
-                      index === currentImageIndex
-                        ? "white"
-                        : "rgba(255, 255, 255, 0.5)",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setCurrentImageIndex(index)}
-                />
-              ))}
-            </Box>
-          </>
         )}
       </Box>
 
@@ -280,15 +172,15 @@ const ProductDetailComponent = ({ product }) => {
         )}
       </Box>
       <ImageModal
-          open={isModalOpen}
-          onClose={handleCloseModal}
-          image={imageUrl}
-          onError={(e) => {
-            e.target.onerror = null; // Evita un bucle infinito si la imagen de reemplazo también falla
-            e.target.src = theme.extras.defaultImage; // Carga la imagen por defecto
-          }}
-          description={product.name}
-        />
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        image={imageUrl}
+        onError={(e) => {
+          e.target.onerror = null; // Evita un bucle infinito si la imagen de reemplazo también falla
+          e.target.src = theme.extras.defaultImage; // Carga la imagen por defecto
+        }}
+        description={product.name}
+      />
     </Box>
   );
 };
