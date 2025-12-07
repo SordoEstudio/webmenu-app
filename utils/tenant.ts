@@ -4,6 +4,8 @@
  * Carga la configuración del tenant desde tenants/{tenantId}.json
  */
 
+import { logger } from './logger'
+
 export interface TenantConfig {
   tenantId: string
   api?: {
@@ -143,7 +145,7 @@ export async function loadTenantConfig(tenantId: string): Promise<TenantConfig> 
     
     return tenantConfig
   } catch (error) {
-    console.error(`Error cargando configuración del tenant ${tenantId}:`, error)
+    logger.error(`Error cargando configuración del tenant ${tenantId}:`, error)
     
     // Si falla, intentar cargar default
     if (tenantId !== 'default') {
@@ -154,7 +156,7 @@ export async function loadTenantConfig(tenantId: string): Promise<TenantConfig> 
           tenantId: 'default',
         }
       } catch (defaultError) {
-        console.error('Error cargando configuración default:', defaultError)
+        logger.error('Error cargando configuración default:', defaultError)
         throw new Error(`No se pudo cargar la configuración del tenant ${tenantId}`)
       }
     }

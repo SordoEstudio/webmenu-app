@@ -22,8 +22,7 @@
   },
   "about": {
     "title": "Sobre Nosotros",
-    "subtitle": "Conoce más sobre nuestro negocio",
-    "description": "Somos un negocio dedicado a ofrecer productos de calidad y un excelente servicio a nuestros clientes.",
+    "description": "Café de especialidad, brunch, pastelería y más...",
     "images": [
       {
         "id": "1",
@@ -34,14 +33,9 @@
     ],
     "contact": [
       {
-        "name": "email",
-        "link": "mailto:contacto@mariamagdalena.com",
-        "label": "contacto@mariamagdalena.com"
-      },
-      {
         "name": "whatsapp",
         "link": "https://wa.me/543492306299",
-        "label": "+54 3492 306-299",
+        "label": "3492 306-299",
         "social": true
       },
       {
@@ -58,11 +52,11 @@
       }
     ],
     "location": {
-      "address": "Av. Principal 1234",
+      "address": "Bv. 25 de Mayo 201",
       "city": "San Vicente",
       "province": "Santa Fe",
-      "postalCode": "C1234ABC",
-      "mapUrl": "https://maps.google.com/?q=Av+Principal+1234+San+Vicente"
+      "postalCode": "2447",
+      "mapUrl": "https://maps.app.goo.gl/4eANFjx56TyzPu9m9"
     },
     "hours": [
         {

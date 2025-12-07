@@ -1,4 +1,5 @@
 import { getApiBaseUrl } from './tenant'
+import { logger } from './logger'
 
 // Obtener API Base URL (variable de entorno con fallback)
 const getApiBaseUrlValue = () => {
@@ -24,11 +25,11 @@ export const fetchCategories = async (coffeeShopId: string, apiBaseUrl?: string)
       throw new Error(`HTTP error! status: ${response.status}`)
     } 
     const data = await response.json()
-    console.log("data de fetch categories", data);
+    logger.log("data de fetch categories", data);
 
     return data
   } catch (error) {
-    console.warn('Error al obtener categorías desde API:', error)
+    logger.warn('Error al obtener categorías desde API:', error)
     throw error
   }
 }
@@ -39,7 +40,7 @@ export const fetchProducts = async (coffeeShopId: string, apiBaseUrl?: string) =
     const response = await fetch(`${baseUrl}/api/v1/Products/Full`, {
       headers: getHeaders(coffeeShopId),
     })
-    console.log("response de fetch products", response);
+    logger.log("response de fetch products", response);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }
@@ -47,7 +48,7 @@ export const fetchProducts = async (coffeeShopId: string, apiBaseUrl?: string) =
 
     return data
   } catch (error) {
-    console.warn('Error al obtener productos desde API:', error)
+    logger.warn('Error al obtener productos desde API:', error)
     throw error
   }
 }
@@ -63,7 +64,7 @@ export const fetchAllData = async (coffeeShopId: string, apiBaseUrl?: string) =>
 
     return { categories, products }
   } catch (error) {
-    console.warn('Error al obtener datos desde API, usando fallback:', error)
+    logger.warn('Error al obtener datos desde API, usando fallback:', error)
     throw error
   }
 }
@@ -87,7 +88,7 @@ export const fetchProductDetails = async (id: string, coffeeShopId: string, apiB
     }
     return data
   } catch (error) {
-    console.error('Error al obtener el detalle del producto:', error)
+    logger.error('Error al obtener el detalle del producto:', error)
     throw error
   }
 }

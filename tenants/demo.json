@@ -22,8 +22,7 @@
   },
   "about": {
     "title": "Sobre Nosotros",
-    "subtitle": "Conoce más sobre nuestro negocio",
-    "description": "Esta es una aplicación demo para mostrar las capacidades del sistema de menús digitales.",
+    "description": "Esta es una aplicación demo para mostrar las capacidades del sistema de webmenús digitales.",
     "images": [
       {
         "id": "1",
@@ -73,11 +72,11 @@
       }
     ],
     "location": {
-      "address": "Calle Demo 123",
+      "address": "Avenida Siempreviva 742",
       "city": "San Vicente",
       "province": "Santa Fe",
       "postalCode": "2447",
-      "mapUrl": "https://maps.app.goo.gl/LsHkFbU9Yk9vY7G76"
+      "mapUrl": "https://maps.app.goo.gl/h8G1X64BCFU6tRJV9"
     },
     "hours": [
       {

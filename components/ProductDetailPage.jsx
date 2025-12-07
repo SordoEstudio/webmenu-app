@@ -3,6 +3,7 @@ import ProductDetailComponent from "@/components/ProductDetailComponent";
 import { Box, LinearProgress } from "@mui/material";
 import { useParams } from "next/navigation";
 import { useMenu } from "@/context/MenuContext";
+import { logger } from "@/utils/logger";
 
 export default function ProductDetailPage() {
   const { productId } = useParams();
@@ -33,7 +34,7 @@ export default function ProductDetailPage() {
           setError("Producto no encontrado");
         }
       } catch (err) {
-        console.error("Error buscando el producto:", err);
+        logger.error("Error buscando el producto:", err);
         setError(err.message);
       } finally {
         setLoading(false);

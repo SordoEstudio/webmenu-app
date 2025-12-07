@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, useMemo } from '
 import { fetchAllData} from '@/utils/fetchingApi'
 import { useTenant } from '@/context/TenantContext'
 import { LinearProgress, Box, Typography } from '@mui/material'
+import { logger } from '@/utils/logger'
 
 
 interface Category {
@@ -108,7 +109,7 @@ export const MenuProvider = ({ children }: MenuProviderProps) => {
         setCategories(sortedCategories)
         setProducts(sortedProducts)
       } catch (err) {
-        console.error('Error loading menu data:', err)
+        logger.error('Error loading menu data:', err)
         setError(err instanceof Error ? err.message : 'Error desconocido')
       } finally {
         setLoading(false)

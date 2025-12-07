@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { getTenantId, loadTenantConfig, getApiBaseUrl, getCoffeeShopId, type TenantConfig } from '@/utils/tenant'
+import { logger } from '@/utils/logger'
 
 interface TenantContextType {
   tenantId: string
@@ -46,7 +47,7 @@ export const TenantProvider = ({ children }: TenantProviderProps) => {
         const tenantConfig = await loadTenantConfig(detectedTenantId)
         setConfig(tenantConfig)
       } catch (err) {
-        console.error('Error cargando configuración del tenant:', err)
+        logger.error('Error cargando configuración del tenant:', err)
         setError(err instanceof Error ? err.message : 'Error desconocido')
       } finally {
         setLoading(false)

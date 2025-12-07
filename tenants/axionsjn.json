@@ -22,8 +22,7 @@
   },
   "about": {
     "title": "Sobre Nosotros",
-    "subtitle": "Conoce más sobre nuestro negocio",
-    "description": "Somos un negocio dedicado a ofrecer productos de calidad y un excelente servicio a nuestros clientes.",
+    "description": "Spot Axion en San Jerónimo Norte",
     "images": [
       {
         "id": "1",
@@ -61,7 +60,7 @@
       }
     ],
     "location": {
-      "address": "San Martin, Gral. Güemes, San Jeronimo Nte., Santa Fe",
+      "address": "San Martin y Gral. Güemes, San Jeronimo Norte, Santa Fe",
       "mapUrl": "https://maps.app.goo.gl/ptJqY5LKMge2vL4a7"
     },
     "hours": [
