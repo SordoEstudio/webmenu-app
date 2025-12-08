@@ -1,11 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, LinearProgress, Typography } from '@mui/material'
 import ProductDetailComponent from '@/components/ProductDetailComponent'
 import { useParams } from 'next/navigation'
 import { useMenu } from '@/context/MenuContext'
 import { useRouter } from 'next/navigation'
+import { useTenant } from '@/context/TenantContext'
+import { trackProductView } from '@/utils/analytics'
 
 export default function ProductDetailPage() {
   const params = useParams()
@@ -13,8 +15,24 @@ export default function ProductDetailPage() {
   const categoryId = params?.categoryId as string
   const router = useRouter()
   const { getProductById, loading } = useMenu()
+  const { tenantId } = useTenant()
 
   const product = getProductById(productId)
+
+  // Track product view
+  useEffect(() => {
+    if (product && !loading) {
+      trackProductView({
+        id: product.id,
+        name: product.name,
+        category_id: product.productCategoryId || categoryId,
+        category: product.category,
+        price: product.price,
+        currency: product.currency,
+        tenant: tenantId,
+      })
+    }
+  }, [product, loading, categoryId, tenantId])
 
   if (loading) {
     return (

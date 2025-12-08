@@ -1,16 +1,21 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useRef } from 'react'
 import { Box, Typography, List, Divider } from '@mui/material'
 import { useSearch } from '@/context/SearchContext'
 import { useMenu } from '@/context/MenuContext'
 import CategoryComponent from '@/components/CategoryComponent'
 import ProductComponent from '@/components/ProductComponent'
 import { useTheme } from '@mui/material/styles'
+import { useTenant } from '@/context/TenantContext'
+import { trackSearch } from '@/utils/analytics'
 const SearchResults = () => {
   const { searchTerm, isSearchActive } = useSearch()
   const { categories, products } = useMenu()
   const theme = useTheme()
+  const { tenantId } = useTenant()
+  const previousSearchTerm = useRef<string>('')
+
   // Filtrar categorías que coincidan con la búsqueda
   const filteredCategories = useMemo(() => {
     if (!isSearchActive) return []
@@ -35,6 +40,19 @@ const SearchResults = () => {
         (product.name.toLowerCase().includes(term))
     )
   }, [searchTerm, products, isSearchActive])
+
+  // Track search when results are shown
+  useEffect(() => {
+    if (isSearchActive && searchTerm.trim() && searchTerm !== previousSearchTerm.current) {
+      const totalResults = filteredCategories.length + filteredProducts.length
+      trackSearch({
+        search_term: searchTerm.trim(),
+        results_count: totalResults,
+        tenant: tenantId,
+      })
+      previousSearchTerm.current = searchTerm.trim()
+    }
+  }, [isSearchActive, searchTerm, filteredCategories.length, filteredProducts.length, tenantId])
 
   if (!isSearchActive) {
     return null

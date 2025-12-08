@@ -7,6 +7,7 @@ import { TenantProvider } from '@/context/TenantContext'
 import { MenuProvider } from '@/context/MenuContext'
 import { SearchProvider } from '@/context/SearchContext'
 import { getTenantId, loadTenantConfig } from '@/utils/tenant'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,6 +34,7 @@ export default async function RootLayout({
   return (
     <html lang={config.metadata.language}>
       <body className={inter.className}>
+        <GoogleAnalytics />
         <TenantProvider>
           <ThemeProvider>
             <SearchProvider>

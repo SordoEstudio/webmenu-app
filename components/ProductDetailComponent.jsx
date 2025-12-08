@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import { Box, Typography, useTheme, Avatar } from "@mui/material";
 import { formatPrice } from "../utils/formatters";
 import ImageModal from "@/components/ImageModal";
+import { trackImageZoom } from "@/utils/analytics";
+import { useTenant } from "@/context/TenantContext";
 const ProductDetailComponent = ({ product }) => {
   /*    product =product?product:productData; */
   const theme = useTheme();
+  const { tenantId } = useTenant();
 
   // Manejo de variantes (si existen)
   const initialVariant =
@@ -37,6 +40,13 @@ const ProductDetailComponent = ({ product }) => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+    // Track image zoom
+    trackImageZoom({
+      product_id: product?.id,
+      product_name: product?.name,
+      image_url: isValidImageUrl(imageUrl) ? imageUrl : undefined,
+      tenant: tenantId,
+    });
   };
 
   const handleCloseModal = () => {
