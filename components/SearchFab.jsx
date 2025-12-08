@@ -2,8 +2,6 @@ import { Fab, InputBase, Box, useTheme } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import { FaSearch,FaTimes } from "react-icons/fa";
 import { useSearch } from "@/context/SearchContext";
-import { useTenant } from "@/context/TenantContext";
-import { trackSearch } from "@/utils/analytics";
 
 const FAB_HEIGHT = 56;
 const FAB_WIDTH = 56;
