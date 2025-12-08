@@ -6,15 +6,30 @@ import ProductComponent from '@/components/ProductComponent'
 import { useMenu } from '@/context/MenuContext'
 import { useTheme } from '@mui/material/styles'
 import Image from 'next/image'
+import { useEffect } from 'react'
+import { useTenant } from '@/context/TenantContext'
+import { trackCategoryView } from '@/utils/analytics'
 
 export default function CategoryProductsPage() {
   const params = useParams()
   const categoryId = params?.categoryId as string
   const theme = useTheme()
   const { getProductsByCategory, getCategoryById, loading } = useMenu()
+  const { tenantId } = useTenant()
 
   const category = getCategoryById(categoryId)
   const products = getProductsByCategory(categoryId)
+
+  // Track category view
+  useEffect(() => {
+    if (category && !loading) {
+      trackCategoryView({
+        id: category.id,
+        name: category.name,
+        tenant: tenantId,
+      })
+    }
+  }, [category, loading, tenantId])
 
   if (loading) {
     return (
